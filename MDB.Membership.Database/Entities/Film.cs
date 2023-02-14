@@ -7,7 +7,6 @@ public class Film : IEntity
     public string? Title { get; set; }
     public DateTime Released { get; set; }
     public int DirectorId { get; set; }
-    [MaxLength(80), Required]
     public bool Free { get; set; }
     [MaxLength(200), Required]
     public string? Description { get; set; }
@@ -16,4 +15,9 @@ public class Film : IEntity
     public virtual ICollection<SimilarFilm> SimilarFilms { get; set; }
     public virtual ICollection<Genre> Genres { get; set; }
     public virtual Director Director { get; set; } = null!;
+    public Film()
+    {
+        SimilarFilms = new HashSet<SimilarFilm>();
+        Genres = new HashSet<Genre>();
+    }
 }

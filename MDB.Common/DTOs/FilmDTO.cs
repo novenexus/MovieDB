@@ -25,12 +25,13 @@ public class FilmCreateDTO
     public string? Title { get; set; }
     public DateTime Released { get; set; }
     public int DirectorId { get; set; }
-    [MaxLength(80), Required]
     public bool Free { get; set; }
     [MaxLength(200), Required]
     public string? Description { get; set; }
     [MaxLength(1024), Required]
     public string? FilmUrl { get; set; }
+    public List<GenreDTO>? Genres { get; set; } = new();
+    public List<SimilarFilmDTO>? SimilarFilms { get; set; } = new();
 }
 
 public class FilmEditDTO : FilmCreateDTO

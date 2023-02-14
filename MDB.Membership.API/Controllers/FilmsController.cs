@@ -20,6 +20,7 @@ namespace MDB.Membership.API.Controllers
         {
             try
             {
+                _db.Include<Film>();
                 var films = await _db.GetAsync<Film, FilmDTO>();
                 return Results.Ok(films);
             }
@@ -35,8 +36,8 @@ namespace MDB.Membership.API.Controllers
             try
             {
                 _db.Include<Film>();
-                _db.HttpInclude<FilmGenre>();
-                _db.HttpInclude<SimilarFilm>();
+                _db.Include<FilmGenre>();
+                _db.Include<SimilarFilm>();
                 var film = await _db.SingleAsync<Film, FilmDTO>(f => f.Id == id);
                 return Results.Ok(film);
             }
@@ -47,17 +48,19 @@ namespace MDB.Membership.API.Controllers
         }
 
         [HttpPost]
-        public async Task Post([FromBody] FilmCreateDTO dto)
+        public async Task<IResult> Post([FromBody] FilmCreateDTO dto)
         {
-            //try
-            //{
-            //    var film = await _db.AddAsync<Film, FilmCreateDTO>(dto);
-            //    return Results.Ok(film);
-            //}
-            //catch (Exception ex)
-            //{
-            //    return Results.NotFound(ex.Message);
-            //}
+            try
+            {
+                var film = await _db.AddAsync<Film, FilmCreateDTO>(dto);
+                var result = await _db.SaveChangesAsync();
+                if (!result) return Results.BadRequest();
+                return Results.Created(_db.GetURI(film), film);
+            }
+            catch (Exception ex)
+            {
+                return Results.BadRequest(ex.Message);
+            }
         }
 
         [HttpPut("{id}")]

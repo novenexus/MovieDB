@@ -9,4 +9,5 @@ public class SimilarFilm : IReferenceEntity
     public virtual Film Film { get; set; } = null!;
     [ForeignKey("SimilarFilmId")]
     public virtual Film Similar { get; set; } = null!;
+
 }

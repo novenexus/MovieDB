@@ -67,7 +67,7 @@ public class DBService : IDBService
         await _db.SaveChangesAsync() >= 0;
 
     public string GetURI<TEntity>(TEntity entity) where TEntity : class, IEntity
-        => $"/{typeof(TEntity).Name.ToLower()}s/{entity.Id}";
+        => $"api/{typeof(TEntity).Name.ToLower()}s/{entity.Id}";
 
     public void Update<TEntity, TDto>(int id, TDto dto)
     where TEntity : class, IEntity
@@ -117,7 +117,7 @@ public class DBService : IDBService
         return true;
     }
 
-    public void Include<TEntity>() where TEntity : class, IEntity
+    public void Include<TEntity>() where TEntity : class
     {
         var propertyNames = _db.Model.FindEntityType(
             typeof(TEntity))?.GetNavigations()
@@ -127,17 +127,5 @@ public class DBService : IDBService
 
         foreach (var name in propertyNames)
             _db.Set<TEntity>().Include(name).Load();
-    }
-
-    public void HttpInclude<TReferenceEntity>() where TReferenceEntity : class, IReferenceEntity
-    {
-        var propertyNames = _db.Model.FindEntityType(
-            typeof(TReferenceEntity))?.GetNavigations()
-            .Select(e => e.Name);
-
-        if (propertyNames is null) return;
-
-        foreach (var name in propertyNames)
-            _db.Set<TReferenceEntity>().Include(name).Load();
     }
 }

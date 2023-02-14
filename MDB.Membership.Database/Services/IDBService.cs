@@ -22,8 +22,7 @@ namespace MDB.Membership.Database.Services
         Task<TReferenceEntity> HttpAddAsync<TReferenceEntity, TDto>(TDto dto)
             where TReferenceEntity : class, IReferenceEntity
             where TDto : class;
-        void Include<TEntity>() where TEntity : class, IEntity;
-        public void HttpInclude<TReferenceEntity>() where TReferenceEntity : class, IReferenceEntity;
+        void Include<TEntity>() where TEntity : class;
         Task<bool> SaveChangesAsync();
         Task<TDto> SingleAsync<TEntity, TDto>(Expression<Func<TEntity, bool>> expression)
             where TEntity : class, IEntity
