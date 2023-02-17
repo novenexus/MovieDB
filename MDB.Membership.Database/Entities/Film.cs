@@ -15,9 +15,4 @@ public class Film : IEntity
     public virtual ICollection<SimilarFilm> SimilarFilms { get; set; }
     public virtual ICollection<Genre> Genres { get; set; }
     public virtual Director Director { get; set; } = null!;
-    public Film()
-    {
-        SimilarFilms = new HashSet<SimilarFilm>();
-        Genres = new HashSet<Genre>();
-    }
 }

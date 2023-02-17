@@ -6,8 +6,4 @@ public class Genre : IEntity
     [MaxLength(50), Required]
     public string? Name { get; set; }
     public virtual ICollection<Film> Films { get; set; }
-    public Genre()
-    {
-        Films = new HashSet<Film>();
-    }
 }

@@ -1,0 +1,14 @@
+﻿@using MDB.Common.Services;
+@inject IAdminService AdminService
+<h3>FilmsPortal</h3>
+
+@code {
+    List<FilmDTO> Model { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model = await AdminService.GetAsync<FilmDTO>($"films?freeOnly=false");
+
+        var film = await AdminService.SingleAsync<FilmDTO>($"films/1");
+    }
+}

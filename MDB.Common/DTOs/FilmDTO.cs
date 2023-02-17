@@ -17,6 +17,8 @@ public class FilmDTO
     [MaxLength(1024), Required]
     public string? FilmUrl { get; set; }
     public virtual DirectorDTO Director { get; set; } = null!;
+    public List<GenreDTO>? Genres { get; set; } = new();
+    public List<SimilarFilmDTO>? SimilarFilms { get; set; } = new();
 }
 
 public class FilmCreateDTO
@@ -30,8 +32,6 @@ public class FilmCreateDTO
     public string? Description { get; set; }
     [MaxLength(1024), Required]
     public string? FilmUrl { get; set; }
-    public List<GenreDTO>? Genres { get; set; } = new();
-    public List<SimilarFilmDTO>? SimilarFilms { get; set; } = new();
 }
 
 public class FilmEditDTO : FilmCreateDTO

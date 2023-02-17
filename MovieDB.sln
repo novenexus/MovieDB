@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDB.Admin.UI", "MDB.Admin.UI\MDB.Admin.UI.csproj", "{13296FF8-EF8F-4E89-8A1D-85A0A2D4DE1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDB.Admin.UI", "MDB.Admin.UI\MDB.Admin.UI.csproj", "{13296FF8-EF8F-4E89-8A1D-85A0A2D4DE1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDB.Common", "MDB.Common\MDB.Common.csproj", "{809B532C-9E13-4E1C-BA96-0C69FABF48B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDB.Common", "MDB.Common\MDB.Common.csproj", "{809B532C-9E13-4E1C-BA96-0C69FABF48B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDB.Membership.Database", "MDB.Membership.Database\MDB.Membership.Database.csproj", "{1D26EF4F-5059-4415-BCD9-DD3E49719071}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDB.Membership.Database", "MDB.Membership.Database\MDB.Membership.Database.csproj", "{1D26EF4F-5059-4415-BCD9-DD3E49719071}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDB.Membership.API", "MDB.Membership.API\MDB.Membership.API.csproj", "{EAA4B6CF-2953-4DF6-BC27-4BCC73A37797}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDB.Membership.API", "MDB.Membership.API\MDB.Membership.API.csproj", "{EAA4B6CF-2953-4DF6-BC27-4BCC73A37797}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

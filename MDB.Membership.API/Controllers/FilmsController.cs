@@ -21,6 +21,7 @@ namespace MDB.Membership.API.Controllers
             try
             {
                 _db.Include<Film>();
+                _db.Include<FilmGenre>();
                 var films = await _db.GetAsync<Film, FilmDTO>();
                 return Results.Ok(films);
             }
@@ -64,13 +65,47 @@ namespace MDB.Membership.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IResult> Put(int id, [FromBody] FilmEditDTO dto)
         {
+            try
+            {
+                if(id != dto.Id) return Results.BadRequest($"Id mismatch. URI Id:{id}, DTO Id:{dto.Id}");
+                var exists = await _db.AnyAsync<Director>(f => f.Id == dto.DirectorId);
+
+                if (!exists) return Results.NotFound ("Director not found.");
+
+                _db.Update<Film, FilmCreateDTO>(id, dto);
+                var result = await _db.SaveChangesAsync();
+                if (!result) return Results.BadRequest();
+
+                return Results.NoContent();
+            }
+            catch (Exception ex)
+            {
+                return Results.BadRequest(ex.Message);
+            }
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IResult> Delete(int id)
         {
+            try
+            {
+                var exists = await _db.AnyAsync<Film>(f => f.Id == id);
+                if (!exists) return Results.NotFound("Film not found.");
+
+                var success = await _db.DeleteAsync<Film>(id);
+                if (!success) return Results.NotFound("Film not found.");
+
+                var result = await _db.SaveChangesAsync();
+                if (!result) return Results.BadRequest("Could not delete the film.");
+
+                return Results.NoContent();
+            }
+            catch (Exception ex)
+            {
+                return Results.BadRequest(ex.Message);
+            }
         }
     }
 }
