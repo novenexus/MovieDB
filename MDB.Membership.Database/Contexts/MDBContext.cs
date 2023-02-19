@@ -7,6 +7,8 @@ namespace MDB.Membership.Database.Contexts;
 
 public class MDBContext : DbContext
 {
+
+
     public DbSet<Film> Films => Set<Film>();
     public DbSet<FilmGenre> FilmGenres => Set<FilmGenre>();
     public DbSet<Genre> Genres => Set<Genre>();
@@ -17,14 +19,13 @@ public class MDBContext : DbContext
 : base(options)
     {
     }
-
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        base.OnModelCreating(builder);
-        foreach (var relationship in builder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
-        {
-            relationship.DeleteBehavior = DeleteBehavior.Restrict;
-        }
+        //base.OnModelCreating(builder);
+        //foreach (var relationship in builder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+        //{
+        //    relationship.DeleteBehavior = DeleteBehavior.Restrict;
+        //}
         builder.Entity<FilmGenre>().HasKey(fg =>
             new { fg.FilmId, fg.GenreId });
         builder.Entity<SimilarFilm>().HasKey(sf =>
@@ -64,7 +65,8 @@ public class MDBContext : DbContext
                 DirectorId = 1,
                 Free = true,
                 Description = "The film is set in a dystopian future Los Angeles of 2019",
-                FilmUrl = "https://www.youtube.com/embed/eogpIG53Cis"
+                FilmUrl = "https://www.youtube.com/embed/eogpIG53Cis",
+                //ImageUrl="/images/film1.jpg"
             },
             new
             {
@@ -74,7 +76,8 @@ public class MDBContext : DbContext
                 DirectorId = 1,
                 Free = false,
                 Description = "The film is set on the fictional island of Isla Nublar",
-                FilmUrl = "https://www.youtube.com/embed/eogpIG53Cis"
+                FilmUrl = "https://www.youtube.com/embed/eogpIG53Cis",
+                //ImageUrl = "/images/film2.jpg"
             },
             new
             {
@@ -84,7 +87,8 @@ public class MDBContext : DbContext
                 DirectorId = 1,
                 Free = false,
                 Description = "K, an officer with the Los Angeles Police Department",
-                FilmUrl = "https://www.youtube.com/embed/eogpIG53Cis"
+                FilmUrl = "https://www.youtube.com/embed/eogpIG53Cis",
+                //ImageUrl = "/images/film3.jpg"
             },
             new
             {
@@ -94,7 +98,8 @@ public class MDBContext : DbContext
                 DirectorId = 1,
                 Free = true,
                 Description = "John Hammond along with few other members try to explore the Jurassic Park's second site",
-                FilmUrl = "https://www.youtube.com/embed/eogpIG53Cis"
+                FilmUrl = "https://www.youtube.com/embed/eogpIG53Cis",
+                //ImageUrl = "/images/film4.jpg"
             });
         {
             builder.Entity<SimilarFilm>().HasData(
