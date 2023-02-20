@@ -7,7 +7,7 @@ public class MembershipService : IMembershipService
     {
         _http = http;
     }
-    public async Task<List<FilmDTO>> GetFilmsAsync(bool freeOnly)
+    public async Task<List<FilmDTO>> GetFilmsAsync(bool freeOnly = false)
     {
         try
         {
@@ -24,15 +24,15 @@ public class MembershipService : IMembershipService
         }
         catch (Exception)
         {
-            ;
-
             throw;
         }
     }
-    public async Task<FilmDTO> GetFilmAsync(int id)
+    public async Task<FilmDTO> GetFilmAsync(int? id)
     {
         try
         {
+            if(id is null) throw new ArgumentNullException("id");
+
             using HttpResponseMessage response =
                 await _http.Client.GetAsync($"films/{id}");
 
@@ -46,8 +46,6 @@ public class MembershipService : IMembershipService
         }
         catch (Exception)
         {
-            ;
-
             throw;
         }
     }

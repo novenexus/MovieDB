@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using System.IO;
 using System.Reflection.Emit;
+using static System.Net.Mime.MediaTypeNames;
+using static System.Net.WebRequestMethods;
 
 namespace MDB.Membership.Database.Contexts;
 
@@ -9,11 +11,11 @@ public class MDBContext : DbContext
 {
 
 
-    public DbSet<Film> Films => Set<Film>();
-    public DbSet<FilmGenre> FilmGenres => Set<FilmGenre>();
-    public DbSet<Genre> Genres => Set<Genre>();
-    public DbSet<Director> Directors => Set<Director>();
-    public DbSet<SimilarFilm> SimilarFilms => Set<SimilarFilm>();
+    public virtual DbSet<Film> Films => Set<Film>();
+    public virtual DbSet<FilmGenre> FilmGenres => Set<FilmGenre>();
+    public virtual DbSet<Genre> Genres => Set<Genre>();
+    public virtual DbSet<Director> Directors => Set<Director>();
+    public virtual DbSet<SimilarFilm> SimilarFilms => Set<SimilarFilm>();
 
     public MDBContext(DbContextOptions<MDBContext> options)
 : base(options)
@@ -21,15 +23,15 @@ public class MDBContext : DbContext
     }
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        //base.OnModelCreating(builder);
-        //foreach (var relationship in builder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
-        //{
-        //    relationship.DeleteBehavior = DeleteBehavior.Restrict;
-        //}
+        base.OnModelCreating(builder);
+        foreach (var relationship in builder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+        {
+            relationship.DeleteBehavior = DeleteBehavior.Restrict;
+        }
         builder.Entity<FilmGenre>().HasKey(fg =>
             new { fg.FilmId, fg.GenreId });
         builder.Entity<SimilarFilm>().HasKey(sf =>
-            new { sf.ParentFilmId, sf.SimilarFilmId });
+            new { sf.FilmId, sf.SimilarFilmId });
         builder.Entity<Film>(entity =>
         {
             entity
@@ -38,7 +40,7 @@ public class MDBContext : DbContext
                 // with the ICollection<SimilarFilms>
                 .HasMany(d => d.SimilarFilms)
                 .WithOne(p => p.Film)
-                .HasForeignKey(d => d.ParentFilmId)
+                .HasForeignKey(d => d.FilmId)
                 // To prevent cycles or multiple cascade paths.
                 // Neded when seeding similar films data.
                 .OnDelete(DeleteBehavior.ClientSetNull);
@@ -48,13 +50,13 @@ public class MDBContext : DbContext
             entity.HasMany(d => d.Genres)
                   .WithMany(p => p.Films)
                   .UsingEntity<FilmGenre>()
-                  // Specify the table name for the connection table
-                  // to avoid duplicate tables (FilmGenre and FilmGenres)
-                  // in the database.
+            // Specify the table name for the connection table
+            // to avoid duplicate tables (FilmGenre and FilmGenres)
+            // in the database.
                   .ToTable("FilmGenres");
         });
         builder.Entity<Director>().HasData(
-            new { Id = 1, Name = "Director Name" });
+            new { Id = 1, Name = "Director Name", Avatar = "/images/director1.jpg", Description = "One of the most influential personalities in the history of cinema, Steven Spielberg is Hollywood's best known director" });
 
         builder.Entity<Film>().HasData(
             new
@@ -66,7 +68,7 @@ public class MDBContext : DbContext
                 Free = true,
                 Description = "The film is set in a dystopian future Los Angeles of 2019",
                 FilmUrl = "https://www.youtube.com/embed/eogpIG53Cis",
-                //ImageUrl="/images/film1.jpg"
+                ImageUrl = "/images/film1.jpg",
             },
             new
             {
@@ -77,7 +79,7 @@ public class MDBContext : DbContext
                 Free = false,
                 Description = "The film is set on the fictional island of Isla Nublar",
                 FilmUrl = "https://www.youtube.com/embed/eogpIG53Cis",
-                //ImageUrl = "/images/film2.jpg"
+                ImageUrl = "/images/film2.jpg"
             },
             new
             {
@@ -88,7 +90,7 @@ public class MDBContext : DbContext
                 Free = false,
                 Description = "K, an officer with the Los Angeles Police Department",
                 FilmUrl = "https://www.youtube.com/embed/eogpIG53Cis",
-                //ImageUrl = "/images/film3.jpg"
+                ImageUrl = "/images/film3.jpg"
             },
             new
             {
@@ -99,12 +101,12 @@ public class MDBContext : DbContext
                 Free = true,
                 Description = "John Hammond along with few other members try to explore the Jurassic Park's second site",
                 FilmUrl = "https://www.youtube.com/embed/eogpIG53Cis",
-                //ImageUrl = "/images/film4.jpg"
+                ImageUrl = "/images/film4.jpg"
             });
         {
             builder.Entity<SimilarFilm>().HasData(
-                new SimilarFilm { ParentFilmId = 1, SimilarFilmId = 3 },
-                new SimilarFilm { ParentFilmId = 2, SimilarFilmId = 4 });
+                new SimilarFilm { FilmId = 1, SimilarFilmId = 3 },
+                new SimilarFilm { FilmId = 2, SimilarFilmId = 4 });
 
             builder.Entity<Genre>().HasData(
                 new { Id = 1, Name = "Action" },

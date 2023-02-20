@@ -1,0 +1,10 @@
+﻿<div class="director d-flex flex-column border border-secondary align-items-center p-2">
+    <img class="rounded-circle border border-info border-3" src="@Model.Avatar" alt="Image of @Model.Name" />
+    <h3>@Model.Name</h3>
+    <h5 class="text-info">Director</h5>
+    <p class="text-center">@Model.Description</p>
+</div>
+
+@code {
+    [Parameter] public DirectorDTO Model { get; set; } = new();
+}

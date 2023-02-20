@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDB.Membership.Database", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDB.Membership.API", "MDB.Membership.API\MDB.Membership.API.csproj", "{EAA4B6CF-2953-4DF6-BC27-4BCC73A37797}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDB.Membership.UI", "MDB.Membership.UI\MDB.Membership.UI.csproj", "{F00574F3-C25D-408F-B828-DCD359BE51DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDB.Membership.UI", "MDB.Membership.UI\MDB.Membership.UI.csproj", "{F00574F3-C25D-408F-B828-DCD359BE51DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

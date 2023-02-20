@@ -94,10 +94,10 @@ public static class MDBContextExtensions
 
             await service.SaveChangesAsync();
 
-            await service.HttpAddAsync<SimilarFilm, SimilarFilmDTO>(new SimilarFilmDTO { ParentFilmId = film1.Id, SimilarFilmId = film3.Id });
-            await service.HttpAddAsync<SimilarFilm, SimilarFilmDTO>(new SimilarFilmDTO { ParentFilmId = film2.Id, SimilarFilmId = film4.Id });
-            await service.HttpAddAsync<SimilarFilm, SimilarFilmDTO>(new SimilarFilmDTO { ParentFilmId = film3.Id, SimilarFilmId = film1.Id });
-            await service.HttpAddAsync<SimilarFilm, SimilarFilmDTO>(new SimilarFilmDTO { ParentFilmId = film4.Id, SimilarFilmId = film2.Id });
+            await service.HttpAddAsync<SimilarFilm, SimilarFilmDTO>(new SimilarFilmDTO { FilmId = film1.Id, SimilarFilmId = film3.Id });
+            await service.HttpAddAsync<SimilarFilm, SimilarFilmDTO>(new SimilarFilmDTO { FilmId = film2.Id, SimilarFilmId = film4.Id });
+            await service.HttpAddAsync<SimilarFilm, SimilarFilmDTO>(new SimilarFilmDTO { FilmId = film3.Id, SimilarFilmId = film1.Id });
+            await service.HttpAddAsync<SimilarFilm, SimilarFilmDTO>(new SimilarFilmDTO { FilmId = film4.Id, SimilarFilmId = film2.Id });
 
             await service.SaveChangesAsync();
         }

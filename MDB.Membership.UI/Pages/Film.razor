@@ -1,0 +1,32 @@
+﻿@page "/film/{Id:int}"
+@inject IMembershipService Service
+
+<h3 class="text-center">Film</h3>
+
+<a class="btn btn-primary rounded-0 mb-1" href="/">
+    <i class="oi oi-arrow-left"></i>
+    <span class="vertical-align"> Back to Dashboard</span>
+</a>
+
+<Marquee Film="Model" />
+
+<div>
+    <Director Model="Model.Director" />
+</div>
+
+<div>
+    @foreach (var film in Model.SimilarFilms)
+    {
+        <h4>@film.Similar</h4>
+    }
+</div>
+
+@code {
+    [Parameter] public int? Id { get; set; }
+    public FilmDTO Model { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model = await Service.GetFilmAsync(Id); 
+    }
+}
