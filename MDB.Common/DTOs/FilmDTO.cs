@@ -15,8 +15,9 @@ public class FilmDTO
     public string? ImageUrl { get; set; }
     public virtual DirectorDTO Director { get; set; } = null!;
     public List<GenreDTO>? Genres { get; set; } = new();
-    public List<SimilarFilmDTO>? SimilarFilms { get; set; } = new();
+    //public List<SimilarFilmDTO>? SimilarFilms { get; set; } = new();
 }
+
 
 public class FilmCreateDTO
 {
@@ -35,4 +36,10 @@ public class FilmCreateDTO
 public class FilmEditDTO : FilmCreateDTO
 {
     public int Id { get; set; }
+}
+public class FilmInfoDTO : FilmEditDTO
+{
+    public List<SimilarFilmDTO>? SimilarFilms { get; set; } = new();
+    public List<GenreDTO>? Genres { get; set; } = new();
+    public virtual DirectorDTO Director { get; set; } = null!;
 }

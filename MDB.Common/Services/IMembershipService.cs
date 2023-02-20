@@ -2,7 +2,7 @@
 {
     public interface IMembershipService
     {
-        Task<FilmDTO> GetFilmAsync(int? id);
+        Task<FilmInfoDTO> GetFilmAsync(int? id);
         Task<List<FilmDTO>> GetFilmsAsync(bool freeOnly);
     }
 }

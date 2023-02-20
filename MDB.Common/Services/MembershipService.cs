@@ -27,7 +27,7 @@ public class MembershipService : IMembershipService
             throw;
         }
     }
-    public async Task<FilmDTO> GetFilmAsync(int? id)
+    public async Task<FilmInfoDTO> GetFilmAsync(int? id)
     {
         try
         {
@@ -38,7 +38,7 @@ public class MembershipService : IMembershipService
 
             response.EnsureSuccessStatusCode();
 
-            var result = JsonSerializer.Deserialize<FilmDTO>(
+            var result = JsonSerializer.Deserialize<FilmInfoDTO>(
                 await response.Content.ReadAsStreamAsync(),
                 new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 

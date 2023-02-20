@@ -1,3 +1,5 @@
+using static System.Collections.Specialized.BitVector32;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,7 +9,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddCors(policy => {
+builder.Services.AddCors(policy =>
+{
     policy.AddPolicy("CorsAllAccessPolicy", opt =>
     opt.AllowAnyOrigin()
     .AllowAnyHeader()
@@ -16,7 +19,7 @@ builder.Services.AddCors(policy => {
 });
 
 builder.Services.AddDbContext<MDBContext>(
-options => 
+options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("MDBConnection")));
 
@@ -44,7 +47,8 @@ app.Run();
 
 void ConfigureAutoMapper()
 {
-    var config = new AutoMapper.MapperConfiguration(cfg => {
+    var config = new AutoMapper.MapperConfiguration(cfg =>
+    {
         //Director mapping
         cfg.CreateMap<Director, DirectorDTO>()
         .ReverseMap();
@@ -60,10 +64,15 @@ void ConfigureAutoMapper()
         .ForMember(dest => dest.Director, src => src.Ignore())
         .ForMember(dest => dest.Genres, src => src.Ignore())
         .ForMember(dest => dest.SimilarFilms, src => src.Ignore());
+        cfg.CreateMap<Film, FilmInfoDTO>();
+  
         //Genre
         cfg.CreateMap<FilmGenre, FilmGenreDTO>().ReverseMap();
         //SimilarFilms
-        cfg.CreateMap<SimilarFilm, SimilarFilmDTO>().ReverseMap();
+        cfg.CreateMap<SimilarFilm, SimilarFilmDTO>()
+        .ForMember(dest => dest.SimilarFilmTitle, src => src.MapFrom(s => s.Film.Title))
+        .ReverseMap()
+        .ForMember(dest => dest.Film, src => src.Ignore());
     });
     var mapper = config.CreateMapper();
     builder.Services.AddSingleton(mapper);

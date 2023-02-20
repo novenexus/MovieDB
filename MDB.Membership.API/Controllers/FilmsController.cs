@@ -39,7 +39,7 @@ namespace MDB.Membership.API.Controllers
                 _db.Include<Film>();
                 _db.Include<FilmGenre>();
                 _db.Include<SimilarFilm>();
-                var film = await _db.SingleAsync<Film, FilmDTO>(f => f.Id == id);
+                var film = await _db.SingleAsync<Film, FilmInfoDTO>(f => f.Id == id);
                 return Results.Ok(film);
             }
             catch (Exception ex)
