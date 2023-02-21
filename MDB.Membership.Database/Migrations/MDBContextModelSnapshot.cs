@@ -217,13 +217,13 @@ namespace MDB.Membership.Database.Migrations
 
             modelBuilder.Entity("MDB.Membership.Database.Entities.SimilarFilm", b =>
                 {
-                    b.Property<int>("ParentFilmId")
+                    b.Property<int>("FilmId")
                         .HasColumnType("int");
 
                     b.Property<int>("SimilarFilmId")
                         .HasColumnType("int");
 
-                    b.HasKey("ParentFilmId", "SimilarFilmId");
+                    b.HasKey("FilmId", "SimilarFilmId");
 
                     b.HasIndex("SimilarFilmId");
 
@@ -232,12 +232,12 @@ namespace MDB.Membership.Database.Migrations
                     b.HasData(
                         new
                         {
-                            ParentFilmId = 1,
+                            FilmId = 1,
                             SimilarFilmId = 3
                         },
                         new
                         {
-                            ParentFilmId = 2,
+                            FilmId = 2,
                             SimilarFilmId = 4
                         });
                 });
@@ -276,7 +276,7 @@ namespace MDB.Membership.Database.Migrations
                 {
                     b.HasOne("MDB.Membership.Database.Entities.Film", "Film")
                         .WithMany("SimilarFilms")
-                        .HasForeignKey("ParentFilmId")
+                        .HasForeignKey("FilmId")
                         .IsRequired();
 
                     b.HasOne("MDB.Membership.Database.Entities.Film", "Similar")

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MDB.Membership.Database.Migrations
 {
     [DbContext(typeof(MDBContext))]
-    [Migration("20230219115955_Two")]
-    partial class Two
+    [Migration("20230221154841_UpdatedDTOs")]
+    partial class UpdatedDTOs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,6 +33,12 @@ namespace MDB.Membership.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Avatar")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -46,6 +52,8 @@ namespace MDB.Membership.Database.Migrations
                         new
                         {
                             Id = 1,
+                            Avatar = "/images/director1.jpg",
+                            Description = "One of the most influential personalities in the history of cinema, Steven Spielberg is Hollywood's best known director",
                             Name = "Director Name"
                         });
                 });
@@ -212,13 +220,13 @@ namespace MDB.Membership.Database.Migrations
 
             modelBuilder.Entity("MDB.Membership.Database.Entities.SimilarFilm", b =>
                 {
-                    b.Property<int>("ParentFilmId")
+                    b.Property<int>("FilmId")
                         .HasColumnType("int");
 
                     b.Property<int>("SimilarFilmId")
                         .HasColumnType("int");
 
-                    b.HasKey("ParentFilmId", "SimilarFilmId");
+                    b.HasKey("FilmId", "SimilarFilmId");
 
                     b.HasIndex("SimilarFilmId");
 
@@ -227,12 +235,12 @@ namespace MDB.Membership.Database.Migrations
                     b.HasData(
                         new
                         {
-                            ParentFilmId = 1,
+                            FilmId = 1,
                             SimilarFilmId = 3
                         },
                         new
                         {
-                            ParentFilmId = 2,
+                            FilmId = 2,
                             SimilarFilmId = 4
                         });
                 });
@@ -271,7 +279,7 @@ namespace MDB.Membership.Database.Migrations
                 {
                     b.HasOne("MDB.Membership.Database.Entities.Film", "Film")
                         .WithMany("SimilarFilms")
-                        .HasForeignKey("ParentFilmId")
+                        .HasForeignKey("FilmId")
                         .IsRequired();
 
                     b.HasOne("MDB.Membership.Database.Entities.Film", "Similar")

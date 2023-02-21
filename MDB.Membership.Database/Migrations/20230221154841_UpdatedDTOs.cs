@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MDB.Membership.Database.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class UpdatedDTOs : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,7 +19,9 @@ namespace MDB.Membership.Database.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Avatar = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -92,15 +94,15 @@ namespace MDB.Membership.Database.Migrations
                 name: "SimilarFilms",
                 columns: table => new
                 {
-                    ParentFilmId = table.Column<int>(type: "int", nullable: false),
+                    FilmId = table.Column<int>(type: "int", nullable: false),
                     SimilarFilmId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SimilarFilms", x => new { x.ParentFilmId, x.SimilarFilmId });
+                    table.PrimaryKey("PK_SimilarFilms", x => new { x.FilmId, x.SimilarFilmId });
                     table.ForeignKey(
-                        name: "FK_SimilarFilms_Films_ParentFilmId",
-                        column: x => x.ParentFilmId,
+                        name: "FK_SimilarFilms_Films_FilmId",
+                        column: x => x.FilmId,
                         principalTable: "Films",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -113,8 +115,8 @@ namespace MDB.Membership.Database.Migrations
 
             migrationBuilder.InsertData(
                 table: "Directors",
-                columns: new[] { "Id", "Name" },
-                values: new object[] { 1, "Director Name" });
+                columns: new[] { "Id", "Avatar", "Description", "Name" },
+                values: new object[] { 1, "/images/director1.jpg", "One of the most influential personalities in the history of cinema, Steven Spielberg is Hollywood's best known director", "Director Name" });
 
             migrationBuilder.InsertData(
                 table: "Genres",
@@ -130,10 +132,10 @@ namespace MDB.Membership.Database.Migrations
                 columns: new[] { "Id", "Description", "DirectorId", "FilmUrl", "Free", "ImageUrl", "Released", "Title" },
                 values: new object[,]
                 {
-                    { 1, "The film is set in a dystopian future Los Angeles of 2019", 1, "https://www.youtube.com/embed/eogpIG53Cis", true, null, new DateTime(1982, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "Blade Runner" },
-                    { 2, "The film is set on the fictional island of Isla Nublar", 1, "https://www.youtube.com/embed/eogpIG53Cis", false, null, new DateTime(1993, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "Jurassic Park" },
-                    { 3, "K, an officer with the Los Angeles Police Department", 1, "https://www.youtube.com/embed/eogpIG53Cis", false, null, new DateTime(2017, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Blade Runner 2049" },
-                    { 4, "John Hammond along with few other members try to explore the Jurassic Park's second site", 1, "https://www.youtube.com/embed/eogpIG53Cis", true, null, new DateTime(1997, 9, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "The Lost World: Jurassic Park" }
+                    { 1, "The film is set in a dystopian future Los Angeles of 2019", 1, "https://www.youtube.com/embed/eogpIG53Cis", true, "/images/film1.jpg", new DateTime(1982, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "Blade Runner" },
+                    { 2, "The film is set on the fictional island of Isla Nublar", 1, "https://www.youtube.com/embed/eogpIG53Cis", false, "/images/film2.jpg", new DateTime(1993, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "Jurassic Park" },
+                    { 3, "K, an officer with the Los Angeles Police Department", 1, "https://www.youtube.com/embed/eogpIG53Cis", false, "/images/film3.jpg", new DateTime(2017, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Blade Runner 2049" },
+                    { 4, "John Hammond along with few other members try to explore the Jurassic Park's second site", 1, "https://www.youtube.com/embed/eogpIG53Cis", true, "/images/film4.jpg", new DateTime(1997, 9, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "The Lost World: Jurassic Park" }
                 });
 
             migrationBuilder.InsertData(
@@ -150,7 +152,7 @@ namespace MDB.Membership.Database.Migrations
 
             migrationBuilder.InsertData(
                 table: "SimilarFilms",
-                columns: new[] { "ParentFilmId", "SimilarFilmId" },
+                columns: new[] { "FilmId", "SimilarFilmId" },
                 values: new object[,]
                 {
                     { 1, 3 },

@@ -17,7 +17,8 @@
 <div>
     @foreach (var film in Model.SimilarFilms)
     {
-        <h4>@film.Similar</h4>
+        <h4>@film.Similar.Title</h4>
+        <img src="@film.Similar.ImageUrl" class="card-img-top rounded-0" alt="Film Image">
     }
 </div>
 
