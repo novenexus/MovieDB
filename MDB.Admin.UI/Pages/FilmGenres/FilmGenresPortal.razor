@@ -13,11 +13,11 @@
 
 @if (Navigation == PageType.Create)
 {
-    <ChangeDirector Page="@Navigation" OnChanged="OnChange"></ChangeDirector>
+    <ChangeFilmGenre Page="@Navigation" OnChanged="OnChange"></ChangeFilmGenre>
 }
 @if (Navigation == PageType.Delete || Navigation == PageType.Edit)
 {
-    <ChangeDirector Page="@Navigation" OnChanged="OnChange" Model="Director"></ChangeDirector>
+    <ChangeFilmGenre Page="@Navigation" OnChanged="OnChange" Model="FilmGenre"></ChangeFilmGenre>
 }
 
 <div class="d-flex me-1">
@@ -26,13 +26,13 @@
     <button type="button" class="btn btn-outline-success rounded-0" @onclick="()=>ChangePageType(PageType.Create)">Create</button>
 </div>
 
-<DirectorsIndex OnClick="OnClick" Model="Model"></DirectorsIndex>
+<FilmGenresIndex OnClick="OnClick" Model="Model"></FilmGenresIndex>
 
 @code {
-    List<DirectorDTO> Model { get; set; } = new();
+    List<FilmGenreDTO> Model { get; set; } = new();
     string Alert = String.Empty;
     string Navigation = String.Empty;
-    public DirectorDTO Director { get; set; } = new();
+    public FilmGenreDTO FilmGenre { get; set; } = new();
 
     void ChangePageType(string pageType) => Navigation = pageType;
     void CloseAlert() => Alert = string.Empty;
@@ -40,13 +40,14 @@
     protected override async Task OnInitializedAsync()
     {
         Alert = String.Empty;
-        Model = await AdminService.GetAsync<DirectorDTO>($"directors?freeOnly=false");
+        Model = await AdminService.GetAsync<FilmGenreDTO>($"FilmGenres");
     }
 
-    async Task OnClick(ClickModel model)
+    async Task OnClick(ClickReferenceModel model)
     {
-        if (model.PageType.Equals(PageType.Edit) || model.PageType.Equals(PageType.Delete))
-            Director = await AdminService.SingleAsync<DirectorDTO>($"directors/{model.Id}") ?? new();
+        if (model.PageType.Equals(PageType.Delete))
+			FilmGenre.FilmId = model.firstId;
+			FilmGenre.GenreId = model.secondId;
 
         ChangePageType(model.PageType);
     }
@@ -56,7 +57,7 @@
         try
         {
             Alert = alert;
-            Model = await AdminService.GetAsync<DirectorDTO>("directors");
+            Model = await AdminService.GetAsync<FilmGenreDTO>("filmgenres");
             ChangePageType(PageType.Index);
         }
         catch

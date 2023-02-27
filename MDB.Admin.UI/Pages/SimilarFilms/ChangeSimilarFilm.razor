@@ -1,0 +1,70 @@
+﻿@inject IAdminService AdminService
+
+<div class="d-xl-flex justify-content-center">
+	<EditForm Model="@Model" OnValidSubmit="@OnFormSubmit" class="mb-5 border border-1 border-secondary p-2 w-25">
+		<DataAnnotationsValidator />
+		<h4>@Page SimilarFilms</h4>
+		<div class="mb-3">
+			@if (Page.Equals(PageType.Delete))
+			{
+				<InputNumber id="Film Title" class="form-control me-2" @bind-Value="Model.FilmId" disabled placeholder="Film Title"></InputNumber>
+				<InputNumber id="Similar Film Title" class="form-control me-2" @bind-Value="Model.SimilarFilmId" disabled placeholder="Similar Film Title"></InputNumber>
+			}
+			else
+			{
+				<InputSelect id="film-title" placeholder="Film Title" @bind-Value="Model.FilmId" class="form-control mb-3">
+					<option value=0>Film Title ...</option>
+					@foreach (var film in Films)
+					{
+						<option value="@film.Id">@film.Title</option>
+					}
+				</InputSelect>
+				<InputSelect id="similar-film-title" placeholder="Similar Film Title" @bind-Value="Model.SimilarFilmId" class="form-control mb-3">
+					<option value=0>Similar Film Title ...</option>
+					@foreach (var similar in SimilarFilms)
+					{
+						<option value="@similar.FilmId">@similar.SimilarFilmTitle</option>
+					}
+				</InputSelect>
+			}
+			<ValidationMessage For="@(() => Model.FilmId)" />
+			<ValidationMessage For="@(() => Model.SimilarFilmId)" />
+		</div>
+		<button type="submit" class="btn btn-@(Page.Equals(PageType.Delete) ? "danger" : "primary") rounded-0">@Page</button>
+	</EditForm>
+</div>
+
+@code {
+    [Parameter] public SimilarFilmDTO Model { get; set; } = new();
+    [Parameter] public string Page { get; set; } = string.Empty;
+    [Parameter] public EventCallback<string> OnChanged { get; set; }
+    List<FilmDTO> Films { get; set; } = new();
+	List<SimilarFilmDTO> SimilarFilms { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Films = await AdminService.GetAsync<FilmDTO>("films");
+		SimilarFilms = await AdminService.GetAsync<SimilarFilmDTO>("similarfilms");
+    }
+
+    private async Task OnFormSubmit()
+    {
+        try
+        {
+            if (Page.Equals(PageType.Create))
+                await AdminService.CreateAsync<SimilarFilmDTO>("similarfilms", Model);
+            else if (Page.Equals(PageType.Delete))
+                await AdminService.DeleteReferenceAsync<SimilarFilmDTO>($"similarfilms", new SimilarFilmDTO
+                {
+                    FilmId = Model.FilmId,
+                    SimilarFilmId = Model.SimilarFilmId
+                });
+
+            await OnChanged.InvokeAsync("");
+        }
+        catch
+        {
+            await OnChanged.InvokeAsync("Couldn't create/edit/delete the SimilarFilm.");
+        }
+    }
+}

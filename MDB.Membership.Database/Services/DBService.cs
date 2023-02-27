@@ -16,8 +16,8 @@ public class DBService : IDBService
     }
 
     public async Task<List<TDto>> GetAsync<TEntity, TDto>()
-   where TEntity : class, IEntity
-   where TDto : class
+    where TEntity : class
+    where TDto : class
     {
         var entities = await _db.Set<TEntity>().ToListAsync();
         return _mapper.Map<List<TDto>>(entities);
@@ -31,7 +31,6 @@ public class DBService : IDBService
         var entities = await _db.Set<TEntity>().Where(expression).ToListAsync();
         return _mapper.Map<List<TDto>>(entities);
     }
-
     private async Task<TEntity?> SingleAsync<TEntity>(
     Expression<Func<TEntity, bool>> expression)
     where TEntity : class, IEntity =>
@@ -47,7 +46,7 @@ public class DBService : IDBService
     }
 
     public async Task<TEntity> AddAsync<TEntity, TDto>(TDto dto)
-    where TEntity : class, IEntity
+    where TEntity : class
     where TDto : class
     {
         var entity = _mapper.Map<TEntity>(dto);
@@ -55,14 +54,6 @@ public class DBService : IDBService
         return entity;
     }
 
-    public async Task<TReferenceEntity> HttpAddAsync<TReferenceEntity, TDto>(TDto dto)
-    where TReferenceEntity : class, IReferenceEntity
-    where TDto : class
-    {
-        var entity = _mapper.Map<TReferenceEntity>(dto);
-        await _db.Set<TReferenceEntity>().AddAsync(entity);
-        return entity;
-    }
     public async Task<bool> SaveChangesAsync() =>
         await _db.SaveChangesAsync() >= 0;
 

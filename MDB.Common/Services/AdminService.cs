@@ -1,4 +1,6 @@
-﻿namespace MDB.Common.Services;
+﻿using System.Net.Http.Json;
+
+namespace MDB.Common.Services;
 
 public class AdminService : IAdminService
 {
@@ -13,7 +15,7 @@ public class AdminService : IAdminService
     {
         try
         {
-            using HttpResponseMessage response = await _http.Client.GetAsync(uri);// $"courses?freeOnly=false");
+            using HttpResponseMessage response = await _http.Client.GetAsync(uri);
             response.EnsureSuccessStatusCode();
 
             var result = JsonSerializer.Deserialize<List<TDto>>(await response.Content.ReadAsStreamAsync(),
@@ -94,6 +96,22 @@ public class AdminService : IAdminService
         catch (Exception ex)
         {
             throw;
+        }
+    }
+
+    public async Task DeleteReferenceAsync<TDto>(string uri, TDto dto)
+    {
+        try
+        {
+            var requestMessage = new HttpRequestMessage(HttpMethod.Delete, uri);
+            requestMessage.Content = JsonContent.Create(dto);
+            using var response = await _http.Client.SendAsync(requestMessage);
+            response.EnsureSuccessStatusCode(); 
+            requestMessage.Dispose();
+        }
+        catch (Exception ex) 
+        { 
+            throw; 
         }
     }
 }

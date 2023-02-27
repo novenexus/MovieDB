@@ -10,6 +10,11 @@
 
 <Marquee Film="Model" />
 
+<a href="/film/@Model.Id/video" class="btn btn-primary btn-lg">
+    <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Play Video
+</a>
+
+
 <div>
     <Director Model="Model.Director" />
 </div>
@@ -18,7 +23,7 @@
     @foreach (var film in Model.SimilarFilms)
     {
         <h4>@film.Similar.Title</h4>
-        <img src="@film.Similar.ImageUrl" class="card-img-top rounded-0" alt="Film Image">
+        <img src="@film.Similar.ImageUrl" class="card-img-top rounded-0" alt="Film Image" style="max-width: 300px;">
     }
 </div>
 

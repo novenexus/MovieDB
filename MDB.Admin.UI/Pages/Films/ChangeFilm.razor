@@ -21,12 +21,16 @@
                 <ValidationMessage For="@(() => Model.Description)" />
             </div>
             <div class="mb-3">
-                <InputText id="image-url" class="form-control me-2" @bind-Value="Model.FilmUrl" placeholder="Film Url"></InputText>
+                <InputText id="film-url" class="form-control me-2" @bind-Value="Model.FilmUrl" placeholder="Film Url"></InputText>
                 <ValidationMessage For="@(() => Model.FilmUrl)" />
             </div>
             <div class="mb-3">
                 <InputDate id="released-date" class="form-control me-2" @bind-Value="Model.Released" placeholder="Released Date"></InputDate>
                 <ValidationMessage For="@(() => Model.Released)" />
+            </div>
+            <div class="mb-3">
+                <InputText id="image-url" class="form-control me-2" @bind-Value="Model.ImageUrl" placeholder="Image Url"></InputText>
+                <ValidationMessage For="@(() => Model.ImageUrl)" />
             </div>
 
             <InputSelect @bind-Value="Model.DirectorId" class="form-control mb-3">

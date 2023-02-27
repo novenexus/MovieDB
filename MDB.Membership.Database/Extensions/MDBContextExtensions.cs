@@ -79,25 +79,25 @@ public static class MDBContextExtensions
             var film3 = service.SingleAsync<Film, FilmDTO>(f => f.Title == "Blade Runner 2049");
             var film4 = service.SingleAsync<Film, FilmDTO>(f => f.Title == "The Lost World: Jurassic Park");
 
-            await service.HttpAddAsync<FilmGenre, FilmGenreDTO>(new FilmGenreDTO { FilmId = film1.Id, GenreId = genre1.Id });
-            await service.HttpAddAsync<FilmGenre, FilmGenreDTO>(new FilmGenreDTO { FilmId = film1.Id, GenreId = genre2.Id });
-            await service.HttpAddAsync<FilmGenre, FilmGenreDTO>(new FilmGenreDTO { FilmId = film1.Id, GenreId = genre4.Id });
-            await service.HttpAddAsync<FilmGenre, FilmGenreDTO>(new FilmGenreDTO { FilmId = film2.Id, GenreId = genre1.Id });
-            await service.HttpAddAsync<FilmGenre, FilmGenreDTO>(new FilmGenreDTO { FilmId = film2.Id, GenreId = genre2.Id });
-            await service.HttpAddAsync<FilmGenre, FilmGenreDTO>(new FilmGenreDTO { FilmId = film2.Id, GenreId = genre3.Id });
-            await service.HttpAddAsync<FilmGenre, FilmGenreDTO>(new FilmGenreDTO { FilmId = film3.Id, GenreId = genre1.Id });
-            await service.HttpAddAsync<FilmGenre, FilmGenreDTO>(new FilmGenreDTO { FilmId = film3.Id, GenreId = genre2.Id });
-            await service.HttpAddAsync<FilmGenre, FilmGenreDTO>(new FilmGenreDTO { FilmId = film3.Id, GenreId = genre4.Id });
-            await service.HttpAddAsync<FilmGenre, FilmGenreDTO>(new FilmGenreDTO { FilmId = film4.Id, GenreId = genre1.Id });
-            await service.HttpAddAsync<FilmGenre, FilmGenreDTO>(new FilmGenreDTO { FilmId = film4.Id, GenreId = genre2.Id });
-            await service.HttpAddAsync<FilmGenre, FilmGenreDTO>(new FilmGenreDTO { FilmId = film4.Id, GenreId = genre3.Id });
+            await service.AddAsync<FilmGenre, FilmGenreDTO>(new FilmGenreDTO { FilmId = film1.Id, GenreId = genre1.Id });
+            await service.AddAsync<FilmGenre, FilmGenreDTO>(new FilmGenreDTO { FilmId = film1.Id, GenreId = genre2.Id });
+            await service.AddAsync<FilmGenre, FilmGenreDTO>(new FilmGenreDTO { FilmId = film1.Id, GenreId = genre4.Id });
+            await service.AddAsync<FilmGenre, FilmGenreDTO>(new FilmGenreDTO { FilmId = film2.Id, GenreId = genre1.Id });
+            await service.AddAsync<FilmGenre, FilmGenreDTO>(new FilmGenreDTO { FilmId = film2.Id, GenreId = genre2.Id });
+            await service.AddAsync<FilmGenre, FilmGenreDTO>(new FilmGenreDTO { FilmId = film2.Id, GenreId = genre3.Id });
+            await service.AddAsync<FilmGenre, FilmGenreDTO>(new FilmGenreDTO { FilmId = film3.Id, GenreId = genre1.Id });
+            await service.AddAsync<FilmGenre, FilmGenreDTO>(new FilmGenreDTO { FilmId = film3.Id, GenreId = genre2.Id });
+            await service.AddAsync<FilmGenre, FilmGenreDTO>(new FilmGenreDTO { FilmId = film3.Id, GenreId = genre4.Id });
+            await service.AddAsync<FilmGenre, FilmGenreDTO>(new FilmGenreDTO { FilmId = film4.Id, GenreId = genre1.Id });
+            await service.AddAsync<FilmGenre, FilmGenreDTO>(new FilmGenreDTO { FilmId = film4.Id, GenreId = genre2.Id });
+            await service.AddAsync<FilmGenre, FilmGenreDTO>(new FilmGenreDTO { FilmId = film4.Id, GenreId = genre3.Id });
 
             await service.SaveChangesAsync();
 
-            await service.HttpAddAsync<SimilarFilm, SimilarFilmDTO>(new SimilarFilmDTO { FilmId = film1.Id, SimilarFilmId = film3.Id });
-            await service.HttpAddAsync<SimilarFilm, SimilarFilmDTO>(new SimilarFilmDTO { FilmId = film2.Id, SimilarFilmId = film4.Id });
-            await service.HttpAddAsync<SimilarFilm, SimilarFilmDTO>(new SimilarFilmDTO { FilmId = film3.Id, SimilarFilmId = film1.Id });
-            await service.HttpAddAsync<SimilarFilm, SimilarFilmDTO>(new SimilarFilmDTO { FilmId = film4.Id, SimilarFilmId = film2.Id });
+            await service.AddAsync<SimilarFilm, SimilarFilmDTO>(new SimilarFilmDTO { FilmId = film1.Id, SimilarFilmId = film3.Id });
+            await service.AddAsync<SimilarFilm, SimilarFilmDTO>(new SimilarFilmDTO { FilmId = film2.Id, SimilarFilmId = film4.Id });
+            await service.AddAsync<SimilarFilm, SimilarFilmDTO>(new SimilarFilmDTO { FilmId = film3.Id, SimilarFilmId = film1.Id });
+            await service.AddAsync<SimilarFilm, SimilarFilmDTO>(new SimilarFilmDTO { FilmId = film4.Id, SimilarFilmId = film2.Id });
 
             await service.SaveChangesAsync();
         }

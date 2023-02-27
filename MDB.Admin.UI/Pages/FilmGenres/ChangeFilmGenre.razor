@@ -1,0 +1,70 @@
+﻿@inject IAdminService AdminService
+
+<div class="d-xl-flex justify-content-center">
+	<EditForm Model="@Model" OnValidSubmit="@OnFormSubmit" class="mb-5 border border-1 border-secondary p-2 w-25">
+		<DataAnnotationsValidator />
+		<h4>@Page FilmGenres</h4>
+		<div class="mb-3">
+			@if (Page.Equals(PageType.Delete))
+			{
+				<InputNumber id="Film Title" class="form-control me-2" @bind-Value="Model.FilmId" disabled placeholder="Film Title"></InputNumber>
+				<InputNumber id="Genre Title" class="form-control me-2" @bind-Value="Model.GenreId" disabled placeholder="Genre Title"></InputNumber>
+			}
+			else
+			{
+				<InputSelect id="film-id" placeholder="Film Id" @bind-Value="Model.FilmId" class="form-control mb-3">
+					<option value=0>Film Title ...</option>
+					@foreach (var film in Films)
+					{
+						<option value="@film.Id">@film.Title</option>
+					}
+				</InputSelect>
+				<InputSelect id="genre-id" placeholder="Genre Id" @bind-Value="Model.GenreId" class="form-control mb-3">
+					<option value=0>Genre Name ...</option>
+					@foreach (var genre in Genres)
+					{
+						<option value="@genre.Id">@genre.Name</option>
+					}
+				</InputSelect>
+			}
+			<ValidationMessage For="@(() => Model.FilmId)" />
+			<ValidationMessage For="@(() => Model.GenreId)" />
+		</div>
+		<button type="submit" class="btn btn-@(Page.Equals(PageType.Delete) ? "danger" : "primary") rounded-0">@Page</button>
+	</EditForm>
+</div>
+
+@code {
+    [Parameter] public FilmGenreDTO Model { get; set; } = new();
+    [Parameter] public string Page { get; set; } = string.Empty;
+    [Parameter] public EventCallback<string> OnChanged { get; set; }
+    List<FilmDTO> Films { get; set; } = new();
+    List<GenreDTO> Genres { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Films = await AdminService.GetAsync<FilmDTO>("Films");
+        Genres = await AdminService.GetAsync<GenreDTO>("Genres");
+    }
+
+    private async Task OnFormSubmit()
+    {
+        try
+        {
+            if (Page.Equals(PageType.Create))
+                await AdminService.CreateAsync<FilmGenreDTO>("filmgenres", Model);
+            else if (Page.Equals(PageType.Delete))
+                await AdminService.DeleteReferenceAsync<FilmGenreDTO>($"filmgenres", new FilmGenreDTO
+                {
+                    FilmId = Model.FilmId,
+                    GenreId = Model.GenreId
+                });
+
+            await OnChanged.InvokeAsync("");
+        }
+        catch
+        {
+            await OnChanged.InvokeAsync("Couldn't create/edit/delete the FilmGenre.");
+        }
+    }
+}

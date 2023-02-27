@@ -1,4 +1,8 @@
 ﻿@page "/{Route}"
+@using MDB.Admin.UI.Pages.Directors
+@using MDB.Admin.UI.Pages.FilmGenres
+@using MDB.Admin.UI.Pages.Genres
+@using MDB.Admin.UI.Pages.SimilarFilms
 <h3>@Route</h3>
 
 @if(Route == Routes.Films)
@@ -14,6 +18,16 @@
 @if (Route == Routes.Directors)
 {
     <DirectorsPortal />
+}
+
+@if (Route == Routes.FilmGenres)
+{
+    <FilmGenresPortal />
+}
+
+@if (Route == Routes.SimilarFilms)
+{
+    <SimilarFilmsPortal />
 }
 
 @code {
