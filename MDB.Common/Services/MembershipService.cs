@@ -27,6 +27,7 @@ public class MembershipService : IMembershipService
             throw;
         }
     }
+   
     public async Task<FilmInfoDTO> GetFilmAsync(int? id)
     {
         try

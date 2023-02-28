@@ -42,7 +42,7 @@ public class MDBContext : DbContext
                 .WithOne(p => p.Film)
                 .HasForeignKey(d => d.FilmId)
                 // To prevent cycles or multiple cascade paths.
-                // Neded when seeding similar films data.
+                // Needed when seeding similar films data.
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
             // Configure a many-to-many realtionship between genres

@@ -14,25 +14,30 @@
     <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Play Video
 </a>
 
-
-<div>
-    <Director Model="Model.Director" />
-</div>
+@if (Model.Director is not null)
+{
+    <div>
+        <Director Model="Model.Director" />
+    </div>
+}
 
 <div>
     @foreach (var film in Model.SimilarFilms)
     {
         <h4>@film.Similar.Title</h4>
-        <img src="@film.Similar.ImageUrl" class="card-img-top rounded-0" alt="Film Image" style="max-width: 300px;">
+        <a href="film/@film.Similar.Id">
+            <img src="@film.Similar.ImageUrl" class="card-img-top rounded-0" alt="Film Image" style="max-width: 300px;">
+        </a>
     }
 </div>
 
 @code {
     [Parameter] public int? Id { get; set; }
     public FilmInfoDTO Model { get; set; } = new();
-
-    protected override async Task OnInitializedAsync()
+    public List<FilmDTO> Films { get; set; } = new();
+    protected override async Task OnParametersSetAsync()
     {
-        Model = await Service.GetFilmAsync(Id); 
+        Model = await Service.GetFilmAsync(Id);
+        Films = await Service.GetFilmsAsync(true);
     }
 }
