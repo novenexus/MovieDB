@@ -1,8 +1,8 @@
 ﻿<div class="d-flex flex-column">
-    <div class="marquee" style="background-image:url('@Film.ImageUrl');">
+    <div class="marquee" style="background-image:url('@Film.BackgroundImageUrl');">
     </div>
     <h1 class="mt-2">@Film.Title</h1>
-    <h4>@Film.Description</h4>
+    <h4 class="mt-4">@Film.Description</h4>
     @foreach (var genre in Film.Genres)
     {
         <h4>@genre.Name</h4>

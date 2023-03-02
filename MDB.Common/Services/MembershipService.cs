@@ -50,4 +50,24 @@ public class MembershipService : IMembershipService
             throw;
         }
     }
+    public async Task<List<GenreDTO>> GetGenresAsync()
+    {
+        try
+        {
+            using HttpResponseMessage response =
+                await _http.Client.GetAsync($"genres");
+
+            response.EnsureSuccessStatusCode();
+
+            var result = JsonSerializer.Deserialize<List<GenreDTO>>(
+                await response.Content.ReadAsStreamAsync(),
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            return result ?? new();
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
 }

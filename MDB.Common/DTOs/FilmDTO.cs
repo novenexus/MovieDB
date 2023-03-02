@@ -13,6 +13,7 @@ public class FilmDTO
     [MaxLength(1024), Required]
     public string? FilmUrl { get; set; }
     public string? ImageUrl { get; set; }
+    public string? BackgroundImageUrl { get; set; }
     public virtual DirectorDTO Director { get; set; } = null!;
     public List<GenreDTO>? Genres { get; set; } = new();
 }
@@ -30,6 +31,7 @@ public class FilmCreateDTO
     [MaxLength(1024), Required]
     public string? FilmUrl { get; set; }
     public string? ImageUrl { get; set; }
+    public string? BackgroundImageUrl { get; set; }
 }
 
 public class FilmEditDTO : FilmCreateDTO

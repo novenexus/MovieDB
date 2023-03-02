@@ -4,6 +4,7 @@ using MDB.Membership.Database.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MDB.Membership.Database.Migrations
 {
     [DbContext(typeof(MDBContext))]
-    partial class MDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230301224534_ChangedDb")]
+    partial class ChangedDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,22 +52,9 @@ namespace MDB.Membership.Database.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Alex Garland"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Steven Spielberg"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Denis Villeneuve"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Steven Spielberg"
+                            Avatar = "/images/director1.jpg",
+                            Description = "One of the most influential personalities in the history of cinema, Steven Spielberg is Hollywood's best known director",
+                            Name = "Director Name"
                         });
                 });
 
@@ -75,9 +65,6 @@ namespace MDB.Membership.Database.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("BackgroundImageUrl")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -116,7 +103,6 @@ namespace MDB.Membership.Database.Migrations
                         new
                         {
                             Id = 1,
-                            BackgroundImageUrl = "/images/film1back.jpg",
                             Description = "A coder at a tech company wins a week-long retreat at the compound of his company's CEO, where he's tasked with testing a new artificial intelligence.",
                             DirectorId = 1,
                             FilmUrl = "https://www.youtube.com/embed/EoQuVnKhxaM",
@@ -128,7 +114,6 @@ namespace MDB.Membership.Database.Migrations
                         new
                         {
                             Id = 2,
-                            BackgroundImageUrl = "/images/film2back.jpg",
                             Description = "Science, sabotage and prehistoric DNA collide when cloned dinosaurs escape their enclosures at a top-secret theme park and begin preying on the guests.",
                             DirectorId = 1,
                             FilmUrl = "https://www.youtube.com/embed/E8WaFvwtphY",
@@ -140,7 +125,6 @@ namespace MDB.Membership.Database.Migrations
                         new
                         {
                             Id = 3,
-                            BackgroundImageUrl = "/images/film3back.jpg",
                             Description = "The contents of a hidden grave draw the interest of an industrial titan and send Officer K, an LAPD blade runner, on a quest to find a missing legend.",
                             DirectorId = 1,
                             FilmUrl = "https://www.youtube.com/embed/gCcx85zbxz4",
@@ -152,7 +136,6 @@ namespace MDB.Membership.Database.Migrations
                         new
                         {
                             Id = 4,
-                            BackgroundImageUrl = "/images/film4back.jpg",
                             Description = "Four years after the mayhem at Jurassic Park, a research team descends upon a secret second island where the cloned dinosaurs roam free.",
                             DirectorId = 1,
                             FilmUrl = "https://www.youtube.com/embed/RxrvaneULkE",

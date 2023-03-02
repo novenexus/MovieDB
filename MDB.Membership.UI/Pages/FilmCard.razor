@@ -1,11 +1,14 @@
-﻿<div class="card" style="width: 18rem;">
-    <img src="@Film.ImageUrl" class="card-img-top rounded-0" alt="Film Image">
-  <div class="card-body">
-    <h5 class="card-title">@Film.Title</h5>
-    <p class="card-text">@Film.Description</p>
-        <a href="film/@Film.Id" class="btn btn-primary rounded-0">View Film</a>
-  </div>
+﻿@*<div class="card h-100">
+      <a href="film/@Film.Id" class="btn btn-primary mt-auto" style="height:100%;">
+            <img src="@Film.ImageUrl" class="card-img-top" alt="Film Image" style="height:100%; object-fit:cover;">
+      </a>
+</div>*@
+<div class="card border-dark h-100">
+    <a href="film/@Film.Id" class="stretched-link" style="height:100%;">
+        <img src="@Film.ImageUrl" class="card-img-top img-fluid" alt="Film Image" style="height:100%; object-fit:cover;">
+    </a>
 </div>
+
 
 @code {
     [Parameter] public FilmDTO Film { get; set; }

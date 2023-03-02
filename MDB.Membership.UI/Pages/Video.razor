@@ -4,15 +4,14 @@
 <div class="d-flex flex-column">
     @if (Model != null && Model.FilmUrl != null)
     {
-        <div class="video-container">
+            <div class="video-player">
             <iframe src="@Model.FilmUrl" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <a href="#" class="back-button"><i class="fa fa-arrow-left"></i></a>
-        </div>
+            </div>
+        <a href="film/@Model.Id" class="btn btn-dark btn-lg" style="position: absolute; top: 10px; left: 10px;">
+            <span class="glyphicon glyphicon-arrow-left"></span> Back
+        </a>
     }
 </div>
-<a href="film/@Model.Id" class="btn btn-primary btn-lg" style="position: absolute; top: 10px; left: 10px;">
-    <span class="glyphicon glyphicon-arrow-left"></span> Back
-</a>
 @code {
     [Parameter] public int? Id { get; set; }
     public FilmInfoDTO Model { get; set; } = new();

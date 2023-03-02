@@ -1,21 +1,37 @@
 ﻿@page "/"
 @inject IMembershipService Service
 
-<PageTitle>Index</PageTitle>
-
-<h1>Movie Database</h1>
-
-<div class="d-flex flex-wrap justify-content-center">
-    @foreach (var film in Films)
+<h1 class="title">MovieDB</h1>
+<div class="d-flex flex-wrap justify-content-left">
+    @foreach (var genre in Genres)
     {
-        <FilmCard Film="@film" />
+        <div class="col-md-12 mb-3">
+            <div class="card bg-black">
+                <div class="card-header bg-black">
+                    <h4 class="text-white">@genre.Name</h4>
+                </div>
+                <div class="card-body p-0">
+                    <div class="row no-gutters">
+                        @foreach (var film in Films.Where(f => f.Genres.Any(g => g.Id == genre.Id)))
+                        {
+                            <div class="col-md-3 col-6 mb-3">
+                                <FilmCard Film="@film" />
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
     }
 </div>
 
+
 @code {
     public List<FilmDTO> Films { get; set; } = new();
+    public List<GenreDTO> Genres { get; set; } = new();
     protected override async Task OnInitializedAsync()
     {
         Films = await Service.GetFilmsAsync(true);
+        Genres = await Service.GetGenresAsync();
     }
 }

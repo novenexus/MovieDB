@@ -4,6 +4,7 @@ using MDB.Membership.Database.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MDB.Membership.Database.Migrations
 {
     [DbContext(typeof(MDBContext))]
-    partial class MDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230301234148_ChangedDb2")]
+    partial class ChangedDb2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,22 +52,9 @@ namespace MDB.Membership.Database.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Alex Garland"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Steven Spielberg"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Denis Villeneuve"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Steven Spielberg"
+                            Avatar = "/images/director1.jpg",
+                            Description = "One of the most influential personalities in the history of cinema, Steven Spielberg is Hollywood's best known director",
+                            Name = "Director Name"
                         });
                 });
 

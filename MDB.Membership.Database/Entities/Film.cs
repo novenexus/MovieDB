@@ -18,6 +18,7 @@ public class Film : IEntity
     [MaxLength(1024), Required]
     public string? FilmUrl { get; set; }
     public string? ImageUrl { get; set; }
+    public string? BackgroundImageUrl { get; set; }
     public virtual ICollection<SimilarFilm> SimilarFilms { get; set; }
     public virtual ICollection<Genre> Genres { get; set; }
     public virtual Director Director { get; set; } = null!;

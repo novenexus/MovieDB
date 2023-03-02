@@ -4,5 +4,6 @@
     {
         Task<FilmInfoDTO> GetFilmAsync(int? id);
         Task<List<FilmDTO>> GetFilmsAsync(bool freeOnly);
+        Task<List<GenreDTO>> GetGenresAsync();
     }
 }

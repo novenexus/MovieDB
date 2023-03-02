@@ -56,19 +56,23 @@ public class MDBContext : DbContext
                   .ToTable("FilmGenres");
         });
         builder.Entity<Director>().HasData(
-            new { Id = 1, Name = "Director Name", Avatar = "/images/director1.jpg", Description = "One of the most influential personalities in the history of cinema, Steven Spielberg is Hollywood's best known director" });
+            new { Id = 1, Name = "Alex Garland" },
+            new { Id = 2, Name = "Steven Spielberg" },
+            new { Id = 3, Name = "Denis Villeneuve" },
+            new { Id = 4, Name = "Steven Spielberg" });
 
         builder.Entity<Film>().HasData(
             new
             {
                 Id = 1,
-                Title = "Blade Runner",
+                Title = "Ex Machina",
                 Released = new DateTime(1982, 11, 11),
                 DirectorId = 1,
-                Free = true,
-                Description = "The film is set in a dystopian future Los Angeles of 2019",
-                FilmUrl = "https://www.youtube.com/embed/eogpIG53Cis",
+                Free = false,
+                Description = "A coder at a tech company wins a week-long retreat at the compound of his company's CEO, where he's tasked with testing a new artificial intelligence.",
+                FilmUrl = "https://www.youtube.com/embed/EoQuVnKhxaM",
                 ImageUrl = "/images/film1.jpg",
+                BackgroundImageUrl = "/images/film1back.jpg"
             },
             new
             {
@@ -77,9 +81,10 @@ public class MDBContext : DbContext
                 Released = new DateTime(1993, 09, 30),
                 DirectorId = 1,
                 Free = false,
-                Description = "The film is set on the fictional island of Isla Nublar",
-                FilmUrl = "https://www.youtube.com/embed/eogpIG53Cis",
-                ImageUrl = "/images/film2.jpg"
+                Description = "Science, sabotage and prehistoric DNA collide when cloned dinosaurs escape their enclosures at a top-secret theme park and begin preying on the guests.",
+                FilmUrl = "https://www.youtube.com/embed/E8WaFvwtphY",
+                ImageUrl = "/images/film2.jpg",
+                BackgroundImageUrl = "/images/film2back.jpg"
             },
             new
             {
@@ -88,9 +93,10 @@ public class MDBContext : DbContext
                 Released = new DateTime(2017, 10, 05),
                 DirectorId = 1,
                 Free = false,
-                Description = "K, an officer with the Los Angeles Police Department",
-                FilmUrl = "https://www.youtube.com/embed/eogpIG53Cis",
-                ImageUrl = "/images/film3.jpg"
+                Description = "The contents of a hidden grave draw the interest of an industrial titan and send Officer K, an LAPD blade runner, on a quest to find a missing legend.",
+                FilmUrl = "https://www.youtube.com/embed/gCcx85zbxz4",
+                ImageUrl = "/images/film3.jpg",
+                BackgroundImageUrl = "/images/film3back.jpg"
             },
             new
             {
@@ -98,10 +104,11 @@ public class MDBContext : DbContext
                 Title = "The Lost World: Jurassic Park",
                 Released = new DateTime(1997, 09, 19),
                 DirectorId = 1,
-                Free = true,
-                Description = "John Hammond along with few other members try to explore the Jurassic Park's second site",
-                FilmUrl = "https://www.youtube.com/embed/eogpIG53Cis",
-                ImageUrl = "/images/film4.jpg"
+                Free = false,
+                Description = "Four years after the mayhem at Jurassic Park, a research team descends upon a secret second island where the cloned dinosaurs roam free.",
+                FilmUrl = "https://www.youtube.com/embed/RxrvaneULkE",
+                ImageUrl = "/images/film4.jpg",
+                BackgroundImageUrl = "/images/film4back.jpg"
             });
         {
             builder.Entity<SimilarFilm>().HasData(
@@ -113,10 +120,12 @@ public class MDBContext : DbContext
                 new { Id = 2, Name = "Sci-Fi" });
 
             builder.Entity<FilmGenre>().HasData(
-                new FilmGenre { FilmId = 1, GenreId = 1 },
                 new FilmGenre { FilmId = 1, GenreId = 2 },
                 new FilmGenre { FilmId = 2, GenreId = 1 },
                 new FilmGenre { FilmId = 3, GenreId = 1 },
+                new FilmGenre { FilmId = 2, GenreId = 2 },
+                new FilmGenre { FilmId = 3, GenreId = 2 },
+                new FilmGenre { FilmId = 4, GenreId = 1 },
                 new FilmGenre { FilmId = 4, GenreId = 2 });
         }
 

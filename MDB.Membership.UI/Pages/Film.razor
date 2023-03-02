@@ -1,34 +1,44 @@
 ﻿@page "/film/{Id:int}"
 @inject IMembershipService Service
 
-<h3 class="text-center">Film</h3>
-
-<a class="btn btn-primary rounded-0 mb-1" href="/">
-    <i class="oi oi-arrow-left"></i>
-    <span class="vertical-align"> Back to Dashboard</span>
-</a>
-
-<Marquee Film="Model" />
-
-<a href="/film/@Model.Id/video" class="btn btn-primary btn-lg">
-    <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Play Video
-</a>
-
-@if (Model.Director is not null)
-{
-    <div>
-        <Director Model="Model.Director" />
-    </div>
-}
-
-<div>
-    @foreach (var film in Model.SimilarFilms)
-    {
-        <h4>@film.Similar.Title</h4>
-        <a href="film/@film.Similar.Id">
-            <img src="@film.Similar.ImageUrl" class="card-img-top rounded-0" alt="Film Image" style="max-width: 300px;">
+<div class="bg-dark">
+    <div class="container">
+        <a class="btn btn-dark rounded-0 mb-1" href="/">
+            <i class="oi oi-arrow-left"></i>
+            <span class="vertical-align">Back to Dashboard</span>
         </a>
-    }
+
+        <div class="text-light">
+            <Marquee Film="Model" />
+        </div>
+
+        <div>
+            <a href="film/@Model.Id/video">
+                <button type="button" class="btn btn-outline-light btn-arrow-right">
+                    Play <i class="fas fa-play"></i>
+                </button>
+            </a>
+
+        </div>
+
+        @if (Model.Director is not null)
+        {
+            <div class="text-light">
+                <h3 class="mt-4">@Model.Director.Name</h3>
+            </div>
+        }
+        <h3 class="text-light mt-4">More Like This</h3>
+        <div class="row">
+            @foreach (var film in Model.SimilarFilms)
+            {
+                <div class="col-md-4">
+                    <a href="film/@film.Similar.Id">
+                        <img src="@film.Similar.ImageUrl" class="card-img-top rounded-0" alt="Film Image" style="max-width: 300px;">
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
 </div>
 
 @code {
