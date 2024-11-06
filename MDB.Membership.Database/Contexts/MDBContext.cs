@@ -9,8 +9,6 @@ namespace MDB.Membership.Database.Contexts;
 
 public class MDBContext : DbContext
 {
-
-
     public virtual DbSet<Film> Films => Set<Film>();
     public virtual DbSet<FilmGenre> FilmGenres => Set<FilmGenre>();
     public virtual DbSet<Genre> Genres => Set<Genre>();

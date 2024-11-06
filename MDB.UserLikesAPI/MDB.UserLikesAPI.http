@@ -1,0 +1,6 @@
+@MDB.UserLikesAPI_HostAddress = http://localhost:5093
+
+GET {{MDB.UserLikesAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

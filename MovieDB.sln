@@ -13,6 +13,32 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDB.Membership.API", "MDB.M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDB.Membership.UI", "MDB.Membership.UI\MDB.Membership.UI.csproj", "{F00574F3-C25D-408F-B828-DCD359BE51DB}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDB.User.API", "MDB.User.API\MDB.User.API.csproj", "{839620C6-F68B-4242-8665-33947226FB10}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDB.User.Database", "MDB.User.Database\MDB.User.Database.csproj", "{38AF764D-1AE6-48FB-950E-25B38171352B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDB.UserLikes.API", "MDB.UserLikesAPI\MDB.UserLikes.API.csproj", "{D9008E77-B4D5-4F01-890E-DF4A1870F1C0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DEC206EF-52DF-4EA8-B096-BFEFD936274A} = {DEC206EF-52DF-4EA8-B096-BFEFD936274A}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDB.UserLikes.Database", "MDB.UserLikes.Database\MDB.UserLikes.Database.csproj", "{02EE59D5-0267-4D6A-B2E8-BE3AD254466A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDB.UserLikes.Service", "MDB.UserLikes.Service\MDB.UserLikes.Service.csproj", "{DEC206EF-52DF-4EA8-B096-BFEFD936274A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDB.Recommendations.API", "MDB.Recommendations.Database\MDB.Recommendations.API.csproj", "{0263D8A5-75F8-4295-997E-71C47A4A0A50}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDB.Recommendations.Database", "MDB.Recommendations.API\MDB.Recommendations.Database.csproj", "{6C75D5F6-82E9-4F24-BDDD-3F681B1384DF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDB.Recommendations.Service", "MDB.Recommendations.Service\MDB.Recommendations.Service.csproj", "{35FA4C96-E3A0-433F-ADDC-DC8CC5B9056E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F7FCFFEE-EE86-4671-A4F1-A31C04A5CA9A}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDB.UserLike.WorkerService", "MDB.UserLike.WorkerService\MDB.UserLike.WorkerService.csproj", "{B7928D93-75C9-419E-85D6-6944A555CD72}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +65,42 @@ Global
 		{F00574F3-C25D-408F-B828-DCD359BE51DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F00574F3-C25D-408F-B828-DCD359BE51DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F00574F3-C25D-408F-B828-DCD359BE51DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{839620C6-F68B-4242-8665-33947226FB10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{839620C6-F68B-4242-8665-33947226FB10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{839620C6-F68B-4242-8665-33947226FB10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{839620C6-F68B-4242-8665-33947226FB10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38AF764D-1AE6-48FB-950E-25B38171352B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38AF764D-1AE6-48FB-950E-25B38171352B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38AF764D-1AE6-48FB-950E-25B38171352B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38AF764D-1AE6-48FB-950E-25B38171352B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9008E77-B4D5-4F01-890E-DF4A1870F1C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9008E77-B4D5-4F01-890E-DF4A1870F1C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9008E77-B4D5-4F01-890E-DF4A1870F1C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9008E77-B4D5-4F01-890E-DF4A1870F1C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02EE59D5-0267-4D6A-B2E8-BE3AD254466A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02EE59D5-0267-4D6A-B2E8-BE3AD254466A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02EE59D5-0267-4D6A-B2E8-BE3AD254466A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02EE59D5-0267-4D6A-B2E8-BE3AD254466A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEC206EF-52DF-4EA8-B096-BFEFD936274A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEC206EF-52DF-4EA8-B096-BFEFD936274A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEC206EF-52DF-4EA8-B096-BFEFD936274A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEC206EF-52DF-4EA8-B096-BFEFD936274A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0263D8A5-75F8-4295-997E-71C47A4A0A50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0263D8A5-75F8-4295-997E-71C47A4A0A50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0263D8A5-75F8-4295-997E-71C47A4A0A50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0263D8A5-75F8-4295-997E-71C47A4A0A50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C75D5F6-82E9-4F24-BDDD-3F681B1384DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C75D5F6-82E9-4F24-BDDD-3F681B1384DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C75D5F6-82E9-4F24-BDDD-3F681B1384DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C75D5F6-82E9-4F24-BDDD-3F681B1384DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35FA4C96-E3A0-433F-ADDC-DC8CC5B9056E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35FA4C96-E3A0-433F-ADDC-DC8CC5B9056E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35FA4C96-E3A0-433F-ADDC-DC8CC5B9056E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35FA4C96-E3A0-433F-ADDC-DC8CC5B9056E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7928D93-75C9-419E-85D6-6944A555CD72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7928D93-75C9-419E-85D6-6944A555CD72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7928D93-75C9-419E-85D6-6944A555CD72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7928D93-75C9-419E-85D6-6944A555CD72}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
