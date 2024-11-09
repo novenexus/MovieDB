@@ -13,13 +13,6 @@ public class RecommendationsController : ControllerBase
         _recommendationService = recommendationService;
     }
 
-    [HttpPost]
-    public async Task<IActionResult> StoreRecommendations([FromBody] List<Recommendation> recommendations)
-    {
-        await _recommendationService.StoreRecommendationsAsync(recommendations);
-        return Ok();
-    }
-
     [HttpGet("user/{userId}")]
     public async Task<IActionResult> GetRecommendationsForUser(int userId)
     {

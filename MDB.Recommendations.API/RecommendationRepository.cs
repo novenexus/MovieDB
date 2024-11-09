@@ -21,7 +21,17 @@ namespace MDB.Recommendations.Database
 
         public async Task StoreRecommendationsAsync(List<Recommendation> recommendations)
         {
-            await _context.Recommendations.AddRangeAsync(recommendations);
+            foreach (var recommendation in recommendations)
+            {
+                var existingRecommendation = await _context.Recommendations
+                    .FirstOrDefaultAsync(r => r.UserId == recommendation.UserId && r.FilmId == recommendation.FilmId);
+
+                if (existingRecommendation == null)
+                {
+                    await _context.Recommendations.AddAsync(recommendation);
+                }
+            }
+
             await _context.SaveChangesAsync();
         }
 

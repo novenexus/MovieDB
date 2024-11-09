@@ -37,8 +37,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		docker-compose.yml = docker-compose.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDB.UserLike.WorkerService", "MDB.UserLike.WorkerService\MDB.UserLike.WorkerService.csproj", "{B7928D93-75C9-419E-85D6-6944A555CD72}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,10 +95,6 @@ Global
 		{35FA4C96-E3A0-433F-ADDC-DC8CC5B9056E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35FA4C96-E3A0-433F-ADDC-DC8CC5B9056E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35FA4C96-E3A0-433F-ADDC-DC8CC5B9056E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B7928D93-75C9-419E-85D6-6944A555CD72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B7928D93-75C9-419E-85D6-6944A555CD72}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B7928D93-75C9-419E-85D6-6944A555CD72}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B7928D93-75C9-419E-85D6-6944A555CD72}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

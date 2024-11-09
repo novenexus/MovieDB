@@ -62,10 +62,12 @@ namespace MDB.UserLikes.Database
 
         public async Task<IEnumerable<int>> GetUserRecommendations(int userId)
         {
+            var recommendationsDateTimeThresh = DateTime.UtcNow - TimeSpan.FromDays(10);
             var recentlyLikedFilmIds = await _context.UserLikes.Where(ul => ul.UserId == userId)
-                .Where(ul => ul.CreatedAt >= DateTime.UtcNow - TimeSpan.FromDays(10))
+                .Where(ul => ul.CreatedAt >= recommendationsDateTimeThresh)
                 .Select(ul => ul.FilmId)
                 .ToListAsync();
+
             return await _context.UserLikes
                 .Where(ul => !recentlyLikedFilmIds.Contains(ul.FilmId) && ul.UserId != userId)
                 .GroupBy(ul => ul.FilmId)
